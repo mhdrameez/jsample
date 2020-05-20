@@ -195,10 +195,10 @@ mkdir -p ${LOGDIR}
 # docker run --cidfile ${LOGDIR}/cid \
 # docker run -d -v ${LOGDIR}:/logs -v ${DATADIR}:/input_data -v $(dirname ${JMX_SCRIPT}):/scripts ${MASTER_IMAGE} -n -t /scripts/$(basename ${JMX_SCRIPT}) -l /logs/results.csv -LDEBUG -R${SERVER_IPS}
 echo "docker run -v ${LOGDIR}:/logs -v ${DATADIR}:/input_data -v $(dirname ${JMX_SCRIPT}):/scripts ${MASTER_IMAGE} -n -t /scripts/$(basename ${JMX_SCRIPT}) -l /logs/results.csv -LDEBUG -R${SERVER_IPS}"
-docker run -v ${LOGDIR}:/logs -v ${DATADIR}:/input_data -v $(dirname ${JMX_SCRIPT}):/scripts ${MASTER_IMAGE} -n -t /scripts/$(basename ${JMX_SCRIPT}) -l /logs/results.csv -LDEBUG -R${SERVER_IPS}
+docker run -v ${LOGDIR}:/logs -v ${DATADIR}:/input_data -v $(dirname ${JMX_SCRIPT}):/scripts ${MASTER_IMAGE} -n -t /scripts/$(basename ${JMX_SCRIPT}) -l /logs/results.jtl -j /logs/error.csv -LDEBUG -R${SERVER_IPS}
 
 # stop all containers once the test is complete
-docker ps | grep jmeter | awk '{ print $1 }' | xargs docker stop
+docker ps | grep sample | awk '{ print $1 }' | xargs docker stop
 
 # TODO Client must somehow notify host of job completion
 

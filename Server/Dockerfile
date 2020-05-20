@@ -1,25 +1,11 @@
-#
-# Dockerfile to create a jmeter-server image.
-# 
-# Usage:
-#  docker run -d \         
-#             -p 0.0.0.0:port-on-host:1099 \
-#             -p 0.0.0.0:some-other-port-on-host:60000 \
-#             -v /some/local/path:/logs \
-#             -v /some/other/local/path:/input-data \
-#             ssankara/jmeter-server
-#
-# TODO - Parameterize jmeter version in the ENTRYPOINT.
-#        Don't know how at the moment.  Cannot seem to use $VAR.  It is not converted; probably
-#        because it is in a quoted string.
-#
-# TODO - Currently exposed ports are hard-coded to use values that are in the jmeter.properties.
-#        It would be nice to be able to parameterize the port numbers.
-#
-FROM mhdrameez/samples
+# Use jmeter-base as the foundation
+FROM mhdrameez/jsample
+
 MAINTAINER mhdrameez
 
-ADD jmeter.properties /var/lib/apache-jmeter-$JMETER_VERSION/bin/
+# Use a predefined configuration.  This sets the contract for connecting to jmeter servers.
+ADD jmeter.properties /var/lib/apache-jmeter-5.3/bin
+ADD test_google.jmx /var/lib/apache-jmeter-5.3/bin
 
 # Expose access to logs & data files
 VOLUME [ "/logs" ]

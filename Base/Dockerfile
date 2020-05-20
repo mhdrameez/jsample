@@ -18,6 +18,6 @@ RUN yum install -y java-$JDK_VERSION-openjdk-devel.x86_64 && rm -rf /var/cache/y
 
 # Install JMeter
 RUN cd /var/lib && \
-  curl https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz -o /var/lib/jmeter-$JMETER_VERSION.tgz && \
+  curl http://apachemirror.wuchna.com//jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz -o /var/lib/jmeter-$JMETER_VERSION.tgz && \
   tar xf jmeter-$JMETER_VERSION.tgz && \
   rm -f jmeter-$JMETER_VERSION.tgz
